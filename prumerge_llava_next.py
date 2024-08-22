@@ -79,28 +79,8 @@ def outlier_dectection(attn):
     ratio = len(outlier_indices) / len(attn_np)
     return ratio
 
-def multihead_attention_sum(desired_layer_q, desired_layer_k, num_heads):
-    num_tokens, embedding_dim = desired_layer_q.shape
-    head_dim = embedding_dim // num_heads
 
-    # Reshape desired_layer_q and desired_layer_k to [num_tokens, num_heads, head_dim]
-    desired_layer_q = desired_layer_q.view(num_tokens, num_heads, head_dim)
-    desired_layer_k = desired_layer_k.view(num_tokens, num_heads, head_dim)
-
-    # Transpose to [num_heads, num_tokens, head_dim]
-    desired_layer_q = desired_layer_q.transpose(0, 1)
-    desired_layer_k = desired_layer_k.transpose(0, 1)
-
-    attn_scores = (desired_layer_q @ desired_layer_k.transpose(-2, -1)) * head_dim ** -0.5
-
-    attn_scores = F.softmax(attn_scores, dim=-1)
-
-    summed_attn_scores = attn_scores.sum(dim=0)
-
-    return summed_attn_scores
-
-
-# ===================================   PruMerge and PruMerge+ END  ======================================
+# ===================================   PruMerge and PruMerge+ HELPER END  ======================================
 
 def get_anyres_image_grid_shape(image_size, grid_pinpoints, patch_size):
     """
