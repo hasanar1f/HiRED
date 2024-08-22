@@ -1,8 +1,4 @@
-# HiRED: Attention-Guided Token Dropping for Efficient Inference of High-Resolution Vision-Language Models in Resource-Constrained Environments
-
-_TL;DR:_ HiRED strategically drops visual tokens in the image encoding stage to improve inference efficiency for High-Resolution Vision-Language Models (e.g., LLaVA-Next) under a fixed token budget.
-
-**Paper Link:** [https://www.arxiv.org/abs/2408.10945](https://www.arxiv.org/abs/2408.10945)
+# HiRED: Attention-Guided Token Dropping for Efficient Inference of High-Resolution Vision-Language Models in Resource-Constrained Environments [(arXiv 2024)](https://www.arxiv.org/abs/2408.10945)
 
 ### Abstract:
 
