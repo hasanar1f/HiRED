@@ -36,6 +36,8 @@ pip install sentencepiece seaborn ipykernel
 4. The inference efficiency (throughput, time-to-first-token latency, and GPU memory usage) evaluation scripts are in [run_HiRED_sys_report.py](run_HiRED_sys_report.py)
 5. The visualization scripts for HiRED token selection is in [view_HiRED_token_selection.ipynb](view_HiRED_token_selection.ipynb)
 6. Our main baselines (PruMerge and PruMerge+) is implemented in [prumerge_llava_next.py](prumerge_llava_next.py). To run them, paste the code from this file into [modeling_llava_next.py](transformers/src/transformers/models/llava_next/modeling_llava_next.py). To toggle between PruMerge and PruMerge+, change the `use_prumerge_plus` flag in the code.
+7. An implementation of HiRED in ShareGPT4V is in [ShareGPT4V](ShareGPT4V). Please follow the instructions in the [ShareGPT4V README](ShareGPT4V/README.md).
+
 
 ## Citation
 
