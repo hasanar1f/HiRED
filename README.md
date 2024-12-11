@@ -1,4 +1,6 @@
-# HiRED: Attention-Guided Token Dropping for Efficient Inference of High-Resolution Vision-Language Models in Resource-Constrained Environments [(AAAI 2025)](https://www.arxiv.org/abs/2408.10945)
+# HiRED: Attention-Guided Token Dropping for Efficient Inference of High-Resolution Vision-Language Models in Resource-Constrained Environments
+
+🔥 **HiRED is accepted at AAAI 2025!** 🎉
 
 ### Abstract:
 
