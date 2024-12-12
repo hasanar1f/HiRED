@@ -9,7 +9,7 @@ git clone https://github.com/ShareGPT4Omni/ShareGPT4V.git
 cd ShareGPT4V
 ```
 
-2. Replace the `./share4v/model/multimodal_encoder/clip_encoder.py` with the [clip_encoder.py](ShareGPT4V/clip_encoder.py) that contains the HiRED implementation (as well as PruMerge as a baseline).
+2. Replace the `./share4v/model/multimodal_encoder/clip_encoder.py` with the [clip_encoder.py](./clip_encoder.py) that contains the HiRED implementation (as well as PruMerge as a baseline).
 
 
 ### Step 2: Install and setup ShareGPT4V
@@ -28,14 +28,14 @@ cd ShareGPT4V
 ### Step 3: Run ShareGPT4V
 
 1. Run inference using ShareGPT4V:  
-   Execute the script located at `ShareGPT4V/run_inference_of_ShareGPT4V.py` using the following command:
+   Execute the script located at `run_inference_of_ShareGPT4V.py` using the following command:
 
    ```bash
    python ShareGPT4V/run_inference_of_ShareGPT4V.py
     ```
 
 2. Run the benchmark script:  
-   Execute the script located at `ShareGPT4V/run_accuracy_benchmarks.sh` using the following command:
+   Execute the script located at `run_accuracy_benchmarks.sh` using the following command:
 
    ```bash
    bash ShareGPT4V/run_accuracy_benchmarks.sh
