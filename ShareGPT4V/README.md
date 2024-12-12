@@ -2,12 +2,15 @@
 
 ### Step 1: Clone the Repository
 
-Clone the **ShareGPT4V** repository:
+1. Clone the **ShareGPT4V** repository:
 
 ```bash
 git clone https://github.com/ShareGPT4Omni/ShareGPT4V.git
 cd ShareGPT4V
 ```
+
+2. Replace the `./share4v/model/multimodal_encoder/clip_encoder.py` with the [clip_encoder.py](ShareGPT4V/clip_encoder.py) that contains the HiRED implementation (as well as PruMerge as a baseline).
+
 
 ### Step 2: Install and setup ShareGPT4V
 
