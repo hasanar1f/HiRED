@@ -9,21 +9,30 @@ import csv
 
 
 def run_inference(batch_size, num_runs, alpha, token_budget_rate, quantization=False):
-    # Initialize processor and model
+    # Model details
     model_id = "llava-hf/llava-v1.6-vicuna-7b-hf"
-    
-    processor = LlavaNextProcessor.from_pretrained(model_id)
-    processor.tokenizer.padding_side = "left"  # needed for batch generation
+    commit_hash = "0524afe4453163103dcefe78eb0a58b3f6424eac"
 
+    # Quantization flag
+    quantization = False
+
+    # Load the model from the specified commit
     model = LlavaNextForConditionalGeneration.from_pretrained(
-        model_id, 
-        torch_dtype=torch.float16, 
-        low_cpu_mem_usage=True, 
-        load_in_4bit=quantization,
-        attn_implementation="sdpa",  # eager or sdpa or flash_attention_2
+        model_id,
+        revision=commit_hash,  # Specify the commit hash
+        torch_dtype=torch.float16,
+        low_cpu_mem_usage=True,
+        load_in_4bit=quantization,  # Handles quantization if enabled
     )
 
-    if quantization is False:  # Hot fix for: .to` is not supported for `4-bit` or `8-bit` bitsandbytes models
+    # Load the processor from the specified commit
+    processor = LlavaNextProcessor.from_pretrained(
+        model_id,
+        revision=commit_hash, 
+    )
+
+    if quantization is False: # hot fix for: .to` is not supported for `4-bit` or `8-bit` bitsandbytes models. 
+        # Please use the model as it is, since the model has already been set to the correct devices and casted to the correct `dtype`.
         model = model.to("cuda:0")
 
     # HiRED config

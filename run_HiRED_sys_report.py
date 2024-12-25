@@ -6,17 +6,26 @@ import time
 import numpy as np
 from helper import *
 
-# Initialize processor and model
+# Model details
 model_id = "llava-hf/llava-v1.6-vicuna-7b-hf"
+commit_hash = "0524afe4453163103dcefe78eb0a58b3f6424eac"
 
+# Quantization flag
 quantization = False
 
-processor = LlavaNextProcessor.from_pretrained(model_id)
+# Load the model from the specified commit
 model = LlavaNextForConditionalGeneration.from_pretrained(
-    model_id, 
-    torch_dtype=torch.float16, 
-    low_cpu_mem_usage=True, 
-    load_in_4bit=quantization,
+    model_id,
+    revision=commit_hash,  # Specify the commit hash
+    torch_dtype=torch.float16,
+    low_cpu_mem_usage=True,
+    load_in_4bit=quantization,  # Handles quantization if enabled
+)
+
+# Load the processor from the specified commit
+processor = LlavaNextProcessor.from_pretrained(
+    model_id,
+    revision=commit_hash, 
 )
 
 if quantization is False: # hot fix for: .to` is not supported for `4-bit` or `8-bit` bitsandbytes models. 

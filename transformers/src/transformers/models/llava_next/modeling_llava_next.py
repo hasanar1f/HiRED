@@ -488,28 +488,35 @@ class LlavaNextForConditionalGeneration(LlavaNextPreTrainedModel):
         return tuple(spatial_masks)
     
     def HiRED_sub_img_budgets(self, spatial_distribution, num_patches, sub_img_budget, num_vision_tokens, image_size):
-        # spatial_distribution: torch.tensor [num_tokens]
+        # spatial_distribution: torch.tensor [num_tokens] # [576]
         # num_patches: int
         # sub_img_budget: int
-        # num_vision_tokens: int
+        # num_vision_tokens: int = 576
         # image_size: tuple[int, int]
 
         num_sub_img_patches = num_patches - 1
+        assert spatial_distribution.shape[0] == num_vision_tokens
 
         # get the applied partition of the image
         num_patch_width, num_patch_height = get_anyres_image_grid_shape(
                     image_size,
                     self.config.image_grid_pinpoints,
                     self.config.vision_config.image_size,
-        )
+        ) # ie. 2x2 for 4 partitions, or 3x1 for 3 partitions across width or 1x3 for 3 partitions across height
 
         assert num_patch_width * num_patch_height == num_sub_img_patches
-        
-        spatial_distribution = spatial_distribution.reshape(num_patch_height, num_patch_width, -1)  # [num_patches_height, num_patches_width, num_vision_tokens]
-        sum_img_mask = spatial_distribution.sum(dim=-1)  # [num_patches_height, num_patches_width]
-        sum_img_mask = sum_img_mask.reshape(-1)  # [num_sub_img_patches]    
 
-        # Ensure the budget ratio is calculated correctly
+        spatial_distribution = spatial_distribution.reshape(24, 24, -1)  # Assuming initial grid is 24x24 patches
+        partition_h = 24 // num_patch_height
+        partition_w = 24 // num_patch_width
+
+        spatial_distribution = spatial_distribution.view(num_patch_height, partition_h, num_patch_width, partition_w, -1)
+        spatial_distribution = spatial_distribution.permute(0, 2, 1, 3, 4)  # [num_patch_height, num_patch_width, partition_h, partition_w, -1]
+        spatial_distribution = spatial_distribution.reshape(num_patch_height, num_patch_width, -1)  # Combine subgrid dimensions
+
+        sum_img_mask = spatial_distribution.sum(dim=-1)  # [num_patches_height, num_patches_width]
+        sum_img_mask = sum_img_mask.reshape(-1)  # [num_sub_img_patches]
+
         budget_ratio = sum_img_mask / sum_img_mask.sum()  # [num_other_patches]
         num_topk_others = (budget_ratio * sub_img_budget).int()  # [num_other_patches]
 
@@ -548,7 +555,7 @@ class LlavaNextForConditionalGeneration(LlavaNextPreTrainedModel):
 
             if total_sub_img_budget > 0: # token selection for sub-images
                 spatial_distribution = torch.zeros_like(top_attn[full_image_patch], dtype=torch.bool)
-                spatial_distribution[full_top_attn.topk(int(num_vision_tokens*(1-alpha)), largest=True).indices] = True
+                spatial_distribution[full_top_attn.topk(100, largest=True).indices] = True
                 sub_img_budgets = self.HiRED_sub_img_budgets(spatial_distribution, num_patch, total_sub_img_budget, num_vision_tokens, image_sizes[idx])
                 
                 # select topk tokens for each sub-image
