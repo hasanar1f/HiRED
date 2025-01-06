@@ -16,7 +16,7 @@ _**HiRED Overview:** Phase 1: Token Budget Allocation. A fixed token budget (i.e
     <img src="./figs/hired_selected_tokens.png" alt="HiRED Token Selection" width="100%">
 </div>
 
-_**Visualization:** For example, when a 10% (~247 tokens) budget is set, HiRED distributes the budget among the full and sub-images. Then HiRED selects the most informative tokens from each partition under allocated budget and drops the rest. The selected tokens are shown in red boxes._
+_**Visualization:** For example, when a 10% (~247 tokens) budget is set, HiRED distributes the budget among the full and sub-images (sub 1-4). Then HiRED selects the most informative tokens from each partition under allocated budget and drops the rest. The selected tokens are shown in red boxes._
 
 ## Installation and Setup
 
