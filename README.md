@@ -18,6 +18,11 @@ _**HiRED Overview:** Phase 1: Token Budget Allocation. A fixed token budget (i.e
 
 _**Visualization:** For example, when a 10% (~287 tokens) budget is set, HiRED distributes the budget among the full and sub-images (sub 1-4). Then HiRED selects the most informative tokens from each partition under allocated budget and drops the rest. The selected tokens are shown in red boxes._
 
+
+## Video Demo
+
+[![Watch the video](https://img.youtube.com/vi/7ND4b64BgtI/0.jpg)](https://www.youtube.com/watch?v=7ND4b64BgtI)
+
 ## Installation and Setup
 
 1. Install [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Anaconda](https://www.anaconda.com/).
