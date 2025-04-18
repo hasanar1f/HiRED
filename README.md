@@ -56,13 +56,13 @@ _**Visualization:** For example, when a 10% (~287 tokens) budget is set, HiRED d
 If you find this work useful, please consider citing:
 
 ```bibtex
-@misc{arif2024hired,
-      title={HiRED: Attention-Guided Token Dropping for Efficient Inference of High-Resolution Vision-Language Models}, 
-      author={Kazi Hasan Ibn Arif and JinYi Yoon and Dimitrios S. Nikolopoulos and Hans Vandierendonck and Deepu John and Bo Ji},
-      year={2024},
-      eprint={2408.10945},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2408.10945}, 
+@inproceedings{arif2025hired,
+  title={HiRED: Attention-Guided Token Dropping for Efficient Inference of High-Resolution Vision-Language Models},
+  author={Arif, Kazi Hasan Ibn and Yoon, JinYi and Nikolopoulos, Dimitrios S and Vandierendonck, Hans and John, Deepu and Ji, Bo},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={39},
+  number={2},
+  pages={1773--1781},
+  year={2025}
 }
 ```
